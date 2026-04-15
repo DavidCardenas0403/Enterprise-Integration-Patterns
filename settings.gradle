@@ -1,0 +1,5 @@
+rootProject.name = 'enterprise-integration-patterns'
+include '01-point-to-point'
+include '02-pubsub'
+include '03-message-queue'
+include '04-message-broker'
