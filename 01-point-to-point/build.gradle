@@ -1,14 +1,32 @@
 plugins {
     id 'java'
-    id 'org.springframework.boot' version '3.2.0'
-    id 'io.spring.dependency-management' version '1.1.4'
+    id 'org.springframework.boot' version '3.4.4'
+    id 'io.spring.dependency-management' version '1.1.7'
+    id 'com.google.protobuf' version '0.9.5'
 }
 
 dependencies {
     implementation 'org.springframework.boot:spring-boot-starter-web'
-    implementation 'net.devh:grpc-spring-boot-starter:2.6.1'
+    implementation 'net.devh:grpc-spring-boot-starter:3.1.0.RELEASE'
+    implementation platform('io.grpc:grpc-bom:1.73.0')
     implementation 'io.grpc:grpc-protobuf'
     implementation 'io.grpc:grpc-stub'
-    implementation 'com.google.protobuf:protobuf-java'
-    compileOnly 'net.devh:grpc-annotations'
+    implementation 'com.google.protobuf:protobuf-java:4.31.1'
+    compileOnly 'org.apache.tomcat:annotations-api:6.0.53'
+}
+
+protobuf {
+    protoc {
+        artifact = 'com.google.protobuf:protoc:4.31.1'
+    }
+    plugins {
+        grpc {
+            artifact = 'io.grpc:protoc-gen-grpc-java:1.73.0'
+        }
+    }
+    generateProtoTasks {
+        all()*.plugins {
+            grpc {}
+        }
+    }
 }
